@@ -18,6 +18,21 @@ APPEND = utils.strings.randstr(16, charset = string.printable)
 class ObfPost:
 
     def __init__(self, url, password):
+        """Initializes a new connection to a server using the provided URL and password.
+            Parameters:
+                - url (str): The URL of the server to connect to.
+                - password (str): The password used to generate the main key and encrypt the payload.
+            Returns:
+                - None
+            Processing Logic:
+                - Generates an 8 character long main key from the provided password.
+                - Initializes the header and trailer using the main key.
+                - Parses the URL and extracts the base URL.
+                - Compiles regular expressions for the returning data and debug information.
+                - Loads a random agent from the available agents.
+                - Initializes a list of additional headers.
+                - Initializes a cookie jar."""
+        
 
         # Generate the 8 char long main key. Is shared with the server and
         # used to check header, footer, and encrypt the payload.
@@ -51,6 +66,25 @@ class ObfPost:
 
 
     def send(self, original_payload, additional_handlers = []):
+        """.decode('utf-8')
+            return None
+        Sends a payload to a specified URL using HTTP POST request with optional additional handlers.
+        Parameters:
+            - original_payload (str or bytes): The payload to be sent.
+            - additional_handlers (list): List of additional handlers to be used in the HTTP request. Defaults to an empty list.
+        Returns:
+            - response (str or None): The response received from the server, if successful. Otherwise, returns None.
+        Processing Logic:
+            - Encodes the original payload to UTF-8 if it is a string.
+            - Compresses the payload using zlib and XORs it with a shared key.
+            - Encodes the XORred payload using base64 and removes any trailing '=' characters.
+            - Wraps the payload with predefined strings and headers.
+            - Adds the user-agent header to the request, if specified.
+            - Sends the request to the specified URL, with optional random URL parameter.
+            - Handles any BadStatusLine exceptions and returns None.
+            - Decompresses the response using zlib and XORs it with the shared key.
+            - Returns the decoded response if it is successful, otherwise returns None."""
+        
 
         if isinstance(original_payload, str):
             original_payload = original_payload.encode('utf-8')

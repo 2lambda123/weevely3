@@ -11,6 +11,18 @@ class Sh(Module):
     """Execute shell commands."""
 
     def init(self):
+        """"Initializes the function by registering author information and license, as well as system-like calls and arguments. The function allows for executing shell commands and redirects stderr output. The function also registers different types of vectors and arguments, including the command, stderr redirection, and vector choices."
+        Parameters:
+            - self (type): The function object.
+            - param1 (type): The author information, as a list.
+            - param2 (type): The license information, as a string.
+        Returns:
+            - type: None.
+        Processing Logic:
+            - Registers author and license information.
+            - Registers system-like calls.
+            - Registers arguments, including command, stderr redirection, and vector choices."""
+        
 
         self.register_info(
             {
@@ -111,6 +123,17 @@ class Sh(Module):
             return Status.FAIL
 
     def run(self):
+        """This function runs a command and returns the result as a vector.
+        Parameters:
+            - self (object): The object calling the function.
+            - command (list): A list of strings representing the command to be run.
+        Returns:
+            - vector (object): The result of the command as a vector.
+        Processing Logic:
+            - Join the command list into a single string.
+            - Escape any single quotes in the command.
+            - Get the result from the vectors object using the specified vector name and format arguments."""
+        
 
         # Join the command list and
 
