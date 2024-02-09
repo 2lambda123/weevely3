@@ -2,7 +2,6 @@ from core.loggers import dlog
 from core import config
 import re
 import urllib.parse
-import random
 import utils
 import string
 import base64
@@ -11,6 +10,7 @@ import hashlib
 import zlib
 import http.client
 import string
+import secrets
 
 PREPEND = utils.strings.randstr(16, charset = string.printable)
 APPEND = utils.strings.randstr(16, charset = string.printable)
@@ -43,7 +43,7 @@ class ObfPost:
         # Load agent
         # TODO: add this to the other channels
         agents = utils.http.load_all_agents()
-        random.shuffle(agents)
+        secrets.SystemRandom().shuffle(agents)
         self.agent = agents[0]
 
         # Init additional headers list
