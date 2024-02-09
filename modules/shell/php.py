@@ -11,6 +11,18 @@ class Php(Module):
     """Execute PHP commands."""
 
     def init(self):
+        """"This function initializes the object and registers information and arguments for the command.
+        Parameters:
+            - self (object): The object being initialized.
+        Returns:
+            - None: This function does not return anything.
+        Processing Logic:
+            - Registers author and license information.
+            - Registers command and its arguments.
+            - Sets channel to None.
+        Example:
+            init(self)""""
+        
 
         self.register_info(
             {
@@ -32,6 +44,18 @@ class Php(Module):
         self.channel = None
 
     def _check_interpreter(self, channel):
+        """Checks the status of the interpreter.
+        Parameters:
+            - channel (type): The channel used to communicate with the interpreter.
+        Returns:
+            - status (Status): The current status of the interpreter.
+        Processing Logic:
+            - Generate a random number.
+            - Send a command to the interpreter.
+            - Check if the response matches the random number.
+            - If it does, set the status to RUN.
+            - If it doesn't, set the status to IDLE."""
+        
 
         rand = str(secrets.SystemRandom().randint(11111, 99999))
 
